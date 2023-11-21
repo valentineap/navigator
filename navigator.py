@@ -36,7 +36,7 @@ catalog = [
     Course(2281,"Environmental management",2,20,coreqs=[2171],year='odd'),
     Course(2551,"Modelling Earth Processes",2,20,prereqs=[1081],year='odd'),
     Course(2357,"Tectonic processes & renewables",2,10,prereqs=[20119],year='odd',term=2),
-    Course(23010,"Frontiers in palaeo",2,10,prereqs=[23019],year='odd',term=2),
+    Course(23010,"Frontiers in palaeo",2,10,coreqs=[23019],year='odd',term=2),
     Course(2397,"Earth structure and dynamics",2,10,prereqs=[1081],year='odd',required=True,term=2),
     Course(2407,"Earth systems & climate II",2,10,year='odd',term=2),
     Course(9997,"Advanced geospatial modelling",2,10,year='odd',term=2),
