@@ -42,7 +42,7 @@ catalog = [
     Course(9997,"Advanced geospatial modelling",2,10,year='odd',term=2),
     Course(2041,"Environmental geochemistry",2,20,coreqs=[2171],year='even'),
     Course(2422,"Groundwater hydrology",2,10,year='even'),
-    Course(20110,"Tectonics",2,10,prereqs=[20119],year='even'),
+    Course(20110,"Tectonics",2,10,coreqs=[20119],year='even'),
     Course(2417,"Astrobiology",2,10,year='even'),
     Course(2327,"Earthquakes, sources and waves",2,10,prereqs=[1081],required=True,year='even'),
     Course(2007,"Seismics",2,10,prereqs=[1081],required=True,year='even'),
