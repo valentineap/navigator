@@ -124,6 +124,9 @@ sel_year = st.radio("Level 1 Year is:",["Even","Odd"])
 st.write("Select modules below. Once one year is 'complete', the next will become visible. After selecting all three years, a timetable will display at the bottom of this page.")
 transcript = []
 c1,c2,c3 = st.columns(3)
+c1.write("Level 1")
+c2.write("Level 2")
+c3.write("Level 3")
 yr=0 if sel_year == 'Even' else 1
 l1 = get_available_courses(catalog,1,year=yr)
 sel_l1 = []
