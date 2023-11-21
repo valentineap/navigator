@@ -30,16 +30,16 @@ catalog = [
     Course(2241,"Fieldwork (geophysical)",2,20,required=True),
     Course(2081,"Geophysical methods for geoscientists",2,20,required=True),
     Course(2291,"Geophysical Data Applications",2,20,required=True),
-    Course(2997,"Geoinformatics",2,10,required=True),
-    Course(20119,"Structural geology",2,10),
-    Course(23019,"Ancient life & environments",2,10),
+    Course(2997,"Geoinformatics",2,10,required=True,term=1),
+    Course(20119,"Structural geology",2,10,term=1),
+    Course(23019,"Ancient life & environments",2,10,term=1),
     Course(2281,"Environmental management",2,20,coreqs=[2171],year='odd'),
     Course(2551,"Modelling Earth Processes",2,20,prereqs=[1081],year='odd'),
-    Course(2357,"Tectonic processes & renewables",2,10,prereqs=[20119],year='odd'),
-    Course(23010,"Frontiers in palaeo",2,10,prereqs=[23019],year='odd'),
-    Course(2397,"Earth structure and dynamics",2,10,prereqs=[1081],year='odd',required=True),
-    Course(2407,"Earth systems & climate II",2,10,year='odd'),
-    Course(9997,"Advanced geospatial modelling",2,10,year='odd'),
+    Course(2357,"Tectonic processes & renewables",2,10,prereqs=[20119],year='odd',term=2),
+    Course(23010,"Frontiers in palaeo",2,10,prereqs=[23019],year='odd',term=2),
+    Course(2397,"Earth structure and dynamics",2,10,prereqs=[1081],year='odd',required=True,term=2),
+    Course(2407,"Earth systems & climate II",2,10,year='odd',term=2),
+    Course(9997,"Advanced geospatial modelling",2,10,year='odd',term=2),
     Course(2041,"Environmental geochemistry",2,20,coreqs=[2171],year='even'),
     Course(2422,"Groundwater hydrology",2,10,year='even'),
     Course(20110,"Tectonics",2,10,prereqs=[20119],year='even'),
@@ -50,30 +50,30 @@ catalog = [
     Course(2887,"Resources",2,10,year='even',prereqs=[1021]),
     Course(3022,"Dissertation",3,40,required=True),
     Course(3251,"Earth science into schools",3,20),
-    Course(30519,"Volcanic and magmatic processes",3,10,prereqs=[2231]),
-    Course(30510,"Volcanoes and environment",3,10),
-    Course(3337,"Element cycling at subduction zones",3,10,prereqs=[2231]),
-    Course(3997,"Geochemistry of the Earth",3,10,prereqs=[2231]),
-    Course(3367,"West Alps field trip",3,10,prereqs=[2231]),
-    Course(3368,"Monitoring oceans",3,10,required=True),
-    Course(3347,"Geophysical flows",3,10,required=True),
-    Course(3437,"Polar & Quaternary environmental processes",3,10,prereqs=[2171]),
-    Course(3387,"Atmospheric circulation and dynamics",3,10),
+    Course(30519,"Volcanic and magmatic processes",3,10,prereqs=[2231],term=1),
+    Course(30510,"Volcanoes and environment",3,10,term=2),
+    Course(3337,"Element cycling at subduction zones",3,10,prereqs=[2231],term=1),
+    Course(3997,"Geochemistry of the Earth",3,10,prereqs=[2231],term=1),
+    Course(3367,"West Alps field trip",3,10,prereqs=[2231],term=1),
+    Course(3368,"Monitoring oceans",3,10,required=True,term=1),
+    Course(3347,"Geophysical flows",3,10,required=True,term=2),
+    Course(3437,"Polar & Quaternary environmental processes",3,10,prereqs=[2171],term=1),
+    Course(3387,"Atmospheric circulation and dynamics",3,10,term=1),
     Course(3281,"Environmental management",3,20,prereqs=[2171],year='odd'),
     Course(3551,"Modelling Earth Processes",3,20,prereqs=[1081],year='odd'),
-    Course(3357,"Tectonic processes & renewables",3,10,prereqs=[20119],year='odd'),
-    Course(33010,"Frontiers in palaeo",3,10,prereqs=[23019],year='odd'),
-    Course(3397,"Earth structure and dynamics",3,10,prereqs=[1081],year='odd',required=True),
-    Course(3407,"Earth systems & climate II",3,10,year='odd'),
-    Course(8997,"Advanced geospatial modelling",3,10,year='odd'),
+    Course(3357,"Tectonic processes & renewables",3,10,prereqs=[20119],year='odd',term=2),
+    Course(33010,"Frontiers in palaeo",3,10,prereqs=[23019],year='odd',term=2),
+    Course(3397,"Earth structure and dynamics",3,10,prereqs=[1081],year='odd',required=True,term=2),
+    Course(3407,"Earth systems & climate II",3,10,year='odd',term=2),
+    Course(8997,"Advanced geospatial modelling",3,10,year='odd',term=2),
     Course(3041,"Environmental geochemistry",3,20,prereqs=[2171],year='even'),
-    Course(3422,"Groundwater hydrology",3,10,year='even'),
-    Course(30110,"Tectonics",3,10,prereqs=[20119],year='even'),
-    Course(3417,"Astrobiology",3,10,year='even'),
-    Course(3327,"Earthquakes, sources and waves",3,10,prereqs=[1081],required=True,year='even'),
-    Course(3007,"Seismics",3,10,prereqs=[1081],required=True,year='even'),
-    Course(3447,"Earth systems & climate I",3,10,year='even'),
-    Course(3887,"Resources",3,10,year='even',prereqs=[1021]),
+    Course(3422,"Groundwater hydrology",3,10,year='even',term=2),
+    Course(30110,"Tectonics",3,10,prereqs=[20119],year='even',term=2),
+    Course(3417,"Astrobiology",3,10,year='even',term=2),
+    Course(3327,"Earthquakes, sources and waves",3,10,prereqs=[1081],required=True,year='even',term=1),
+    Course(3007,"Seismics",3,10,prereqs=[1081],required=True,year='even',term=2),
+    Course(3447,"Earth systems & climate I",3,10,year='even',term=2),
+    Course(3887,"Resources",3,10,year='even',prereqs=[1021],term=2),
 ]
 
 def find(catalog,code):
@@ -121,9 +121,10 @@ def apply_prereqs(catalog,transcript):
 st.set_page_config(layout='wide')
 st.title("Geophysics")
 sel_year = st.radio("Level 1 Year is:",["Even","Odd"])
+st.write("Select modules below. Once one year is 'complete', the next will become visible. After selecting all three years, a timetable will display at the bottom of this page.")
 transcript = []
 c1,c2,c3 = st.columns(3)
-yr=0 if sel_year is 'Even' else 1
+yr=0 if sel_year == 'Even' else 1
 l1 = get_available_courses(catalog,1,year=yr)
 sel_l1 = []
 for c in l1:
@@ -198,9 +199,19 @@ if l1_credits==120:
                     chosen_courses = []
                     for c in transcript:
                         chosen_courses+=[find(catalog,c)]
-                
-                t1,t2,t3 = st.columns(3)
-                [t1.write(c) for c in get_available_courses(chosen_courses,1)]
+                st.write("---")
+                st.write("Timetable")
+                terms = st.columns(6)
+                for level in range(3):
+                    for term in range(2):
+                        terms[2*level+term].write("Level %i, Term %i"%(level+1,term+1))
+                        terms[2*level+term].write("---")
+                for c in chosen_courses:
+                    if c.term==0 or c.term==1:
+                        terms[2*(c.level-1)].write(c.name)
+                    if c.term==0 or c.term==2:
+                        terms[2*(c.level-1)+1].write(c.name)
+
 
 
 # while True:
