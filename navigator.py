@@ -1,7 +1,8 @@
 import streamlit as st
 
+
 class Course(object):
-    def __init__(self,code,name,level,credits,prereqs=[],coreqs=[],required=False,year='both',term=0):
+    def __init__(self,code,name,level,credits,prereqs=[],coreqs=[],required=[],available=[],year='both',term=0):
         self.code = code
         self.name = name
         self.level=level
@@ -9,6 +10,7 @@ class Course(object):
         self.prereqs = prereqs
         self.coreqs = coreqs
         self.required=required
+        self.available=available
         self.year=year
         self.term=term
     def __repr__(self):
@@ -16,64 +18,174 @@ class Course(object):
 
     
 catalog = [
-    Course(1101,"Understanding Earth Sciences",1,20,required=True),
-    Course(1021,"Earth Materials",1,20,required=False),
-    Course(1111,"Environment, resources & materials",1,20,required=False),
-    Course(1141,'Sustainability',1,20,required=True),
-    Course(1051,"Field Studies",1,20,required=True),
-    Course(1991,"Computing",1,20, required=True),
-    Course(1081,"Further mathematics",1,20,required=True),
-    Course(2031,"Sedimentary environments",2,20),
-    Course(2231,"Igneous & Met Processes",2,20,prereqs=[1021]),
-    Course(2171,"Isotopes & Climate",2,20),
-    Course(2201,"Fieldwork (environmental)",2,20),
-    Course(2241,"Fieldwork (geophysical)",2,20,required=True),
-    Course(2081,"Geophysical methods for geoscientists",2,20,required=True),
-    Course(2291,"Geophysical Data Applications",2,20,required=True),
-    Course(2997,"Geoinformatics",2,10,required=True,term=1),
-    Course(20119,"Structural geology",2,10,term=1),
-    Course(23019,"Ancient life & environments",2,10,term=1),
-    Course(2281,"Environmental management",2,20,coreqs=[2171],year='odd'),
-    Course(2551,"Modelling Earth Processes",2,20,prereqs=[1081],year='odd'),
-    Course(2357,"Tectonic processes & renewables",2,10,coreqs=[20119],year='odd',term=2),
-    Course(23010,"Frontiers in palaeo",2,10,coreqs=[23019],year='odd',term=2),
-    Course(2397,"Earth structure and dynamics",2,10,prereqs=[1081],year='odd',required=True,term=2),
-    Course(2407,"Earth systems & climate II",2,10,year='odd',term=2),
-    Course(9997,"Advanced geospatial modelling",2,10,year='odd',term=2),
-    Course(2041,"Environmental geochemistry",2,20,coreqs=[2171],year='even'),
-    Course(2422,"Groundwater hydrology",2,10,year='even',term=2),
-    Course(20110,"Tectonics",2,10,coreqs=[20119],year='even',term=2),
-    Course(2417,"Astrobiology",2,10,year='even',term=2),
-    Course(2327,"Earthquakes, sources and waves",2,10,prereqs=[1081],required=True,year='even',term=1),
-    Course(2007,"Seismics",2,10,prereqs=[1081],required=True,year='even',term=2),
-    Course(2447,"Earth systems & climate I",2,10,year='even',term=2),
-    Course(2887,"Resources",2,10,year='even',prereqs=[1021],term=2),
-    Course(3022,"Dissertation",3,40,required=True),
-    Course(3251,"Earth science into schools",3,20),
-    Course(30519,"Volcanic and magmatic processes",3,10,prereqs=[2231],term=1),
-    Course(30510,"Volcanoes and environment",3,10,term=2),
-    Course(3337,"Element cycling at subduction zones",3,10,prereqs=[2231],term=1),
-    Course(3997,"Geochemistry of the Earth",3,10,prereqs=[2231],term=1),
-    Course(3367,"West Alps field trip",3,10,prereqs=[2231],term=1),
-    Course(3368,"Monitoring oceans",3,10,required=True,term=1),
-    Course(3347,"Geophysical flows",3,10,required=True,term=2),
-    Course(3437,"Polar & Quaternary environmental processes",3,10,prereqs=[2171],term=1),
-    Course(3387,"Atmospheric circulation and dynamics",3,10,term=1),
-    Course(3281,"Environmental management",3,20,prereqs=[2171],year='odd'),
-    Course(3551,"Modelling Earth Processes",3,20,prereqs=[1081],year='odd'),
-    Course(3357,"Tectonic processes & renewables",3,10,prereqs=[20119],year='odd',term=2),
-    Course(33010,"Frontiers in palaeo",3,10,prereqs=[23019],year='odd',term=2),
-    Course(3397,"Earth structure and dynamics",3,10,prereqs=[1081],year='odd',required=True,term=2),
-    Course(3407,"Earth systems & climate II",3,10,year='odd',term=2),
-    Course(8997,"Advanced geospatial modelling",3,10,year='odd',term=2),
-    Course(3041,"Environmental geochemistry",3,20,prereqs=[2171],year='even'),
-    Course(3422,"Groundwater hydrology",3,10,year='even',term=2),
-    Course(30110,"Tectonics",3,10,prereqs=[20119],year='even',term=2),
-    Course(3417,"Astrobiology",3,10,year='even',term=2),
-    Course(3327,"Earthquakes, sources and waves",3,10,prereqs=[1081],required=True,year='even',term=1),
-    Course(3007,"Seismics",3,10,prereqs=[1081],required=True,year='even',term=2),
-    Course(3447,"Earth systems & climate I",3,10,year='even',term=2),
-    Course(3887,"Resources",3,10,year='even',prereqs=[1021],term=2),
+    Course(1101,"Understanding Earth Sciences",
+           1,20,
+           required=['F600','F630','F665'],
+           available=['F600','F630','F645','F665']),
+    Course(1021,"Earth Materials",
+           1,20,
+           available=['F600','F665'],
+           required=['F600']),
+    Course(1111,"Environment, resources & materials",
+           1,20,
+           available=['F630','F645','F665'],
+           required=['F630','F645']),
+    Course(1141,'Sustainability',
+           1,20,
+           required=['F600','F630','F645','F665'],
+           available=['F600','F630','F645','F665']),
+    Course(1051,"Field Studies",
+           1,20,
+           required=['F600','F630','F665'],
+           available=['F600','F630','F645','F665']),
+    Course(91111,"Computing",
+           1,20, 
+           required=['F600','F630','F645','F665'],
+           available=['F600','F630','F645','F665']),
+    Course(1061,"Mathematical methods",
+           1,20,
+           required=[],
+           available=['F600','F645','F630']),
+    Course(1081,"Further mathematics",1,20,
+           required=['F665'],
+           available=['F600','F645','F665','F630']),
+    Course(71261,"Introduction to climate change",1,20,required=['F645'],available=['F645']),
+    Course(2031,"Sedimentary environments",
+           2,20,
+           prereqs=[1101],
+           available=['F600','F630','F645','F665'],
+           required=['F600','F630']),
+    Course(2231,"Igneous & Met Processes",
+           2,20,
+           prereqs=[1021],
+           available=['F600','F665'],
+           required=['F600']),
+    Course(2171,"Isotopes & Climate",
+           2,20,
+           available=['F600','F630','F645','F665'],
+           required=['F630','F645']),
+    Course(2191,"Fieldwork (geological)",
+           2,20,
+           available=['F600'],
+           required=['F600']),
+    Course(2201,"Fieldwork (environmental)",2,20,available=['F630','F645','F665'],required=['F630'],prereqs=[1051]),
+    Course(2241,"Fieldwork (geophysical)",2,20,required=['F665'],available=['F630','F645','F665'],prereqs=[1051]),
+    Course(2081,"Geophysical methods for geoscientists",
+           2,20,
+           required=['F665'],
+           available=['F600','F630','F665']),
+    Course(2291,"Geophysical Data Applications",2,20,required=['F665'],available=['F665']),
+    Course(92117,"Geoinformatics",
+           2,10,
+           required=['F600','F630','F665'],
+           term=1,
+           available=['F600','F630','F645','F665']),
+    Course(920111,
+           "Structural geology",
+           2,10,term=1,
+           available=['F600','F630','F665'],
+           required=['F600']),
+    Course(923011,
+           "Ancient life & environments",
+           2,10,
+           term=1,
+           available=['F600','F630','F645','F665']),
+    Course(72651,"Carbon & biogeochemical cycles",
+           2,20,
+           available=['F645']),
+    Course(72571,"Reconstructing environmental change",
+           2,20,
+           available=['F645']),
+    Course(72531,"Glaciers and glaciation",
+           2,20,
+           available=['F645']),
+    Course(72661,"Climate change: geographical perspectives",
+           2,20,
+           available=['F645']),
+    Course(83281,
+           "Environmental management",
+           2,20,
+           coreqs=[2171],year='odd',
+           available=['F600','F630','F645','F665'],required=['F630']),
+    Course(3281,"Environmental management",3,20,prereqs=[2171],year='odd',available=['F600','F630','F645','F665'],required=['F630']),
+    Course(2251,
+           "Modelling Earth Processes",
+           2,20,
+           prereqs=[1081],
+           year='odd',
+           available=['F600','F630','F645','F665'],
+           coreqs=[92117]),
+    Course(82251,"Modelling Earth Processes",
+           3,20,
+           prereqs=[1081,92117],
+           year='odd',
+           available=['F600','F630','F645','F665']),
+    Course(83357,"Tectonic processes & renewables",
+           2,10,
+           coreqs=[920111],
+           year='odd',term=2,available=['F600','F630','F665']),
+    Course(3357,"Tectonic processes & renewables",3,10,prereqs=[920111],year='odd',term=2,available=['F600','F630','F665']),
+    Course(923012,"Frontiers in palaeo",
+           2,10,coreqs=[923011],
+           year='odd',
+           term=2,
+           available=['F600','F630','F645','F665']),
+    Course(8923012,"Frontiers in palaeo",3,10,prereqs=[923011],year='odd',term=2,available=['F600','F630','F645','F665']),
+    Course(83397,"Earth structure and dynamics",
+           2,10,prereqs=[1081],year='odd',required=['F665'],term=2,available=['F600','F630','F665']),
+    Course(3397,"Earth structure and dynamics",3,10,prereqs=[1081],year='odd',required=['F665'],term=2,available=['F600','F630','F665']),
+    Course(83407,"Earth systems & climate II",
+           2,10,year='odd',term=2,available=['F600','F630','F645','F665'],required=['F645']),
+    Course(3407,"Earth systems & climate II",3,10,year='odd',term=2,available=['F600','F630','F645','F665'],required=['F645']),
+    Course(94447,"Advanced geospatial modelling",
+           2,10,
+           year='odd',term=2,available=['F600','F630','F645','F665']),
+    Course(894447,"Advanced geospatial modelling",3,10,year='odd',term=2,available=['F600','F630','F645','F665']),
+    Course(83041,"Environmental geochemistry",
+           2,20,coreqs=[2171],year='even',available=['F600','F630','F645','F665'],required=['F630']),
+    Course(3041,"Environmental geochemistry",3,20,prereqs=[2171],year='even',available=['F600','F630','F645','F665'],required=['F630']),
+    Course(83427,"Groundwater hydrology",
+           2,10,year='even',term=2,available=['F600','F630','F645','F665']),
+    Course(3427,"Groundwater hydrology",3,10,year='even',term=2,available=['F600','F630','F645','F665']),
+    Course(920112,"Tectonics",2,10,coreqs=[920111],year='even',term=2,available=['F600','F630','F665'],required=['F600']),
+    Course(8920112,"Tectonics",3,10,prereqs=[920111],year='even',term=2,available=['F600','F630','F665'],required=['F600']),
+    Course(83417,"Astrobiology",2,10,year='even',term=2,available=['F600','F630','F645','F665']),
+    Course(3417,"Astrobiology",3,10,year='even',term=2,available=['F600','F630','F645','F665']),
+    Course(83327,"Earthquakes, sources and waves",2,10,prereqs=[1081],required=['F665'],year='even',term=1,available=['F600','F630','F665']),
+    Course(3327,"Earthquakes, sources and waves",3,10,prereqs=[1081],required=['F665'],year='even',term=1,available=['F600','F630','F665']),
+    Course(893337,"Seismics",2,10,prereqs=[1081],required=['F665'],year='even',term=2,available=['F600','F630','F665']),
+    Course(93337,"Seismics",3,10,prereqs=[1081],required=['F665'],year='even',term=2,available=['F600','F630','F665']),
+    Course(83447,"Earth systems & climate I",2,10,year='even',term=2,available=['F600','F630','F645','F665'],required=['F645']),
+    Course(3447,"Earth systems & climate I",3,10,year='even',term=2,available=['F600','F630','F645','F665'],required=['F645']),
+    Course(92557,"Resources",2,10,year='even',prereqs=[1021],term=2,available=['F600','F665']),
+    Course(892557,"Resources",3,10,year='even',prereqs=[1021],term=2,available=['F600','F665']),
+    Course(3022,"Dissertation",3,40,required=['F600','F630','F645','F665'],available=['F600','F630','F645','F665']),
+    Course(3251,"Earth science into schools",3,20,available=['F600','F630','F665']),
+    Course(930511,"Volcanic and magmatic processes",3,10,prereqs=[2231],term=1,available=['F600','F665']),
+    Course(930512,"Volcanoes and environment",3,10,term=2,available=['F600','F630','F645','F665']),
+    Course(3337,"Element cycling at subduction zones",3,10,prereqs=[2231],term=1,available=['F600','F665']),
+    Course(93227,"Geochemistry of the Earth",3,10,prereqs=[2231],term=1,available=['F600','F665']),
+    Course(3367,"West Alps field trip",3,10,prereqs=[2231],term=1,available=['F600','F665']),
+    Course(33471,"Monitoring oceans",3,10,required=['F665'],term=1,available=['F600','F630','F645','F665']),
+    Course(33472,"Geophysical flows",3,10,required=['F665'],term=2,available=['F600','F630','F665'],prereqs=[2251],year='even'),
+    Course(833472,"Geophysical flows",3,10,required=['F665'],term=2,available=['F600','F630','F665'],coreqs=[82251],year='odd'),
+    Course(3437,"Polar & Quaternary environmental processes",3,10,prereqs=[2171],term=1,available=['F600','F630','F645','F665']),
+    Course(3387,"Atmospheric circulation and dynamics",3,10,term=1,available=['F600','F630','F645','F665']),
+    Course(73927,"Past climate of low latitudes",3,10,term=1,available=['F645']),
+    Course(73817,"Antarctic Environments",3,10,term=2,available=['F645']),
+    Course(73191,"Sea level change & coastal evolution",3,20,available=['F645']),
+    Course(73641,"Oceans past & present",3,20,available=['F645']),
+    Course(73511,"Ice age environments",3,20,available=['F645']),
+    Course(73641,"Archaeology and global sustainable developments",3,20,available=['F645'])
+
+
+        
+
+
+    
+    
+        
+    
 ]
 
 def find(catalog,code):
@@ -98,10 +210,17 @@ def count_credits(catalog):
         credits+=c.credits
     return credits
 
-def get_available_courses(catalog,level,year=None):
+def contains(l,k):
+    try:
+        l.index(k)
+        return True
+    except ValueError:
+        return False
+    
+def get_available_courses(catalog,prog,level,year=None):
     out = []
     for c in catalog:
-        if c.level == level:
+        if contains(c.available,prog) and c.level == level:
             if (year is None) or (year==0 and (c.year=='both' or c.year=='even')) or (year==1 and (c.year=='both' or c.year=='odd')):
                 out +=[c]
     return out
@@ -119,7 +238,8 @@ def apply_prereqs(catalog,transcript):
     return out
 
 st.set_page_config(layout='wide')
-st.title("Geophysics")
+#st.title("Geophysics")
+sel_prog = st.radio("Programme:",["F600 Geology","F630 Environmental Geoscience",'F645 Climate Science',"F665 Geophysics"])
 sel_year = st.radio("Level 1 Year is:",["Even","Odd"])
 st.write("Select modules below. Once one year is 'complete', the next will become visible. After selecting all three years, a timetable will display at the bottom of this page.")
 transcript = []
@@ -128,21 +248,30 @@ c1.write("Level 1")
 c2.write("Level 2")
 c3.write("Level 3")
 yr=0 if sel_year == 'Even' else 1
-l1 = get_available_courses(catalog,1,year=yr)
+prog = sel_prog.split(' ')[0]
+l1 = get_available_courses(catalog,prog,1,year=yr)
 sel_l1 = []
 for c in l1:
-    sel_l1+=[c1.checkbox("%s (%i)"%(c.name,c.credits),value=c.required,disabled=c.required)]
+    req=contains(c.required,prog)
+    sel_l1+=[c1.checkbox("%s (%i)"%(c.name,c.credits),value=req,disabled=req)]
 l1_credits = 0
 for s,c in zip(sel_l1,l1):
     if s: 
         transcript+=[c.code]
         l1_credits+=c.credits
+mathok=True
+if not (contains(transcript,1061) or contains(transcript,1081)):
+    c1.error("Must select one maths module")
+    mathok=False
+if contains(transcript,1061) and contains(transcript,1081):
+    c1.error("Must select only one maths module")
+    mathok=False
 if not l1_credits==120:
     c1.error("Selected credits: %i"%l1_credits)
 else:
     c1.success("Selected credits: %i"%l1_credits)
-if l1_credits==120:
-    l2 = get_available_courses(catalog,2,year=1-yr)
+if l1_credits==120 and mathok:
+    l2 = get_available_courses(catalog,prog,2,year=1-yr)
     sel_l2 = []
     for c in l2:
         has_prereqs=True
@@ -151,7 +280,8 @@ if l1_credits==120:
                 transcript.index(p)
             except:
                 has_prereqs=False
-        sel_l2+=[c2.checkbox("%s (%i)"%(c.name,c.credits),value=c.required,disabled=c.required or not has_prereqs)]
+        req = contains(c.required,prog)
+        sel_l2+=[c2.checkbox("%s (%i)"%(c.name,c.credits),value=req,disabled=req or not has_prereqs)]
     l2_credits = 0
     coreqs = []
     for s,c in zip(sel_l2,l2):
@@ -171,7 +301,7 @@ if l1_credits==120:
     else:
         c2.success("Selected credits: %i"%l2_credits)
         if has_coreqs:
-            l3 = get_available_courses(catalog,3,year=yr)
+            l3 = get_available_courses(catalog,prog,3,year=yr)
             sel_l3 = []
             for c in l3:
                 has_prereqs=True
@@ -180,7 +310,8 @@ if l1_credits==120:
                         transcript.index(p)
                     except:
                         has_prereqs=False
-                sel_l3+=[c3.checkbox("%s (%i)"%(c.name,c.credits),value=c.required,disabled=c.required or not has_prereqs)]
+                req = contains(c.required,prog)
+                sel_l3+=[c3.checkbox("%s (%i)"%(c.name,c.credits),value=req,disabled=req or not has_prereqs)]
             l3_credits = 0
             for s,c in zip(sel_l3,l3):
                 if s:
